@@ -1,0 +1,142 @@
+/* YAF Outing guide. One column for phones, the photo app's green, light only like the app.
+   No web fonts or scripts from elsewhere, so it loads on a weak signal. */
+:root {
+  --green: #1c5e3e;
+  --green: oklch(0.43 0.11 155);
+  --green-soft: #eef6f1;
+  --green-soft: oklch(0.96 0.03 155);
+  --ink: #18181b;
+  --muted: #555b57;
+  --line: #d9ddda;
+  --paper: #ffffff;
+  --warn-soft: #fbf4e4;
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 17px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+main {
+  max-width: 36rem;
+  margin: 0 auto;
+  padding: max(20px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(40px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+}
+
+h1, h2, h3 { line-height: 1.2; text-wrap: balance; }
+h1 { font-size: 1.75rem; margin: 0; }
+h2 { font-size: 1.3rem; margin: 2.25rem 0 0.75rem; }
+h3 { font-size: 1.1rem; margin: 1.5rem 0 0.5rem; }
+p { margin: 0.5rem 0; }
+ul { margin: 0.5rem 0; padding-left: 1.25rem; }
+li { margin: 0.35rem 0; }
+li::marker { color: var(--muted); }
+a { color: var(--green); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid var(--green); outline-offset: 2px; }
+strong { font-weight: 650; }
+
+.sub { color: var(--muted); margin-top: 0.25rem; }
+.intro { margin-top: 1rem; }
+.note { color: var(--muted); font-size: 1rem; }
+
+/* The day, as a rail of times. Each place opens in Google Maps. */
+.timeline { list-style: none; margin: 0.75rem 0 0; padding: 0; }
+.timeline li {
+  display: grid;
+  grid-template-columns: 3.4rem 1fr;
+  gap: 0 0.75rem;
+  margin: 0;
+  padding: 0.6rem 0;
+  border-top: 1px solid var(--line);
+}
+.timeline li:last-child { border-bottom: 1px solid var(--line); }
+.time { font-weight: 650; font-variant-numeric: tabular-nums; }
+.what { margin: 0; }
+.where { margin: 0.15rem 0 0; color: var(--muted); }
+.where a { display: inline-flex; align-items: center; gap: 0.3rem; min-height: 44px; margin: -10px 0; }
+.pin { width: 1rem; height: 1rem; flex: none; }
+
+/* The answers page: a card that opens it from the guide, and its lock. */
+.card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 2.25rem;
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  color: var(--ink);
+  text-decoration: none;
+}
+.card:active { background: var(--green-soft); }
+.card .lock { width: 1.5rem; height: 1.5rem; color: var(--green); flex: none; }
+.card span { flex: 1; min-width: 0; }
+.card strong { display: block; }
+.card small { display: block; color: var(--muted); font-size: 1rem; }
+.chev { width: 1.25rem; height: 1.25rem; color: var(--muted); flex: none; }
+
+.back { display: inline-flex; align-items: center; min-height: 44px; margin: -8px 0 0.5rem; }
+
+form.unlock { margin-top: 1.5rem; }
+form.unlock label { display: block; font-weight: 650; margin-bottom: 0.4rem; }
+.row { display: flex; gap: 0.5rem; }
+input[type="password"] {
+  flex: 1;
+  min-width: 0;
+  min-height: 48px;
+  padding: 0 0.85rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font: inherit;
+  color: inherit;
+  background: var(--paper);
+}
+button {
+  min-height: 48px;
+  padding: 0 1.25rem;
+  border: 0;
+  border-radius: 10px;
+  background: var(--green);
+  color: #fff;
+  font: inherit;
+  font-weight: 650;
+}
+button:active, .button:active { opacity: 0.85; }
+/* The one link that matters on the day: the photo app. */
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  margin: 0.75rem 0 0.5rem;
+  border-radius: 10px;
+  background: var(--green);
+  color: #fff;
+  font-weight: 650;
+  text-decoration: none;
+}
+.error { color: #9b1c1c; font-weight: 600; min-height: 1.5em; }
+
+/* One Type of Christ: the hint, how it points to the Type, how the Type points to Christ. */
+.type { margin-top: 2rem; padding-top: 1.25rem; border-top: 1px solid var(--line); }
+.type h2 { margin: 0; }
+.hint {
+  margin: 0.75rem 0;
+  padding: 0.6rem 0.9rem;
+  border-left: 3px solid var(--green);
+  background: var(--green-soft);
+  border-radius: 0 10px 10px 0;
+  font-style: italic;
+}
+.hint p { margin: 0; }
+.label { display: block; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--green); margin: 1rem 0 0.25rem; }
+.refs { color: var(--muted); font-size: 1rem; margin-top: 0.75rem; }
+
+footer { margin-top: 2.5rem; color: var(--muted); font-size: 1rem; }
