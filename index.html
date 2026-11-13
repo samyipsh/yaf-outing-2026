@@ -6,7 +6,11 @@
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#ffffff">
 <title>YAF Outing · Sat 14 Nov</title>
-<meta name="description" content="The morning's timeline and what to know for the YAF Outing at the Singapore Botanic Gardens.">
+<meta name="description" content="The timeline and scoring for the YAF Outing at the Singapore Botanic Gardens.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Loaded without blocking the page, so a weak signal shows the system font first. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&amp;family=Inter:wght@400;600;700&amp;display=swap" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -14,7 +18,7 @@
   <header>
     <h1>YAF Outing</h1>
     <p class="sub">Sat 14 Nov · Singapore Botanic Gardens</p>
-    <p class="intro">We meet at Botanic Gardens MRT Exit A at 8:30 am, spend the morning on station games and a photo quest around Eco-Lake, and finish with lunch together at Adam Road Food Centre. You’ll hear your group, group IC and photo IC at breakfast, or at the briefing if you skip breakfast.</p>
+    <p class="quest">Between stations, do the photo quest in the app.</p>
     <a class="button" href="https://yaf-photo-quest.samyipsh-work.workers.dev">Open the photo app</a>
   </header>
 
@@ -44,7 +48,7 @@
       <li>
         <span class="time">9:25</span>
         <div>
-          <p class="what">Briefing on the stations, puzzle card and photo quest, then your whole group’s first photo</p>
+          <p class="what">Briefing on the stations, puzzle card and photo quest, then a photo with Dn Poh: any of you, or the whole group</p>
         </div>
       </li>
       <li>
@@ -53,7 +57,7 @@
           <p class="what">Try sending a photo, then walk to your first station</p>
         </div>
       </li>
-      <li>
+      <li class="main">
         <span class="time">9:45</span>
         <div>
           <p class="what">Station games and photo walk: six rounds of 20 minutes. Your group’s stops are in the app</p>
@@ -77,69 +81,27 @@
     </ol>
   </section>
 
-  <section aria-labelledby="how">
-    <h2 id="how">How the morning works</h2>
-    <ul>
-      <li>Each round: 15 minutes to play, then 5 to walk to your next stop. Station ICs keep time, so move on when they say.</li>
-      <li>Each station ranks the groups: first gets 300 points and last gets 60, and tied groups share. Every photo that counts adds its challenge’s points.</li>
-      <li>The highest total wins and picks their bubble tea first. A tie goes to the group with more photo points.</li>
-    </ul>
-    <h3>Puzzle card</h3>
-    <ul>
-      <li>Your group IC gets the card at the briefing, with your first hint and Type of Christ. Every station gives you one more pair, whatever you score.</li>
-      <li>Stick each pair in its slot, and write a sentence on why they match and how that person or thing points to Christ.</li>
-      <li>It isn’t scored. We go through the answers together at the results.</li>
-    </ul>
-  </section>
-
-  <section aria-labelledby="photos">
-    <h2 id="photos">Photo quest</h2>
-    <ul>
-      <li>Pick your group in the app. Anyone in the group can send photos.</li>
-      <li>The judge checks photos during the morning. One that doesn’t count comes back with a reason, and you can retake it.</li>
-      <li>Awards for most animals (name each one), most flower colours, most photos (obvious repeats don’t count) and most liked photo.</li>
-    </ul>
-    <h3>Photo rules</h3>
-    <ul>
-      <li>Photos only. Don’t pick plants, catch insects or feed animals.</li>
-      <li>Ask before you photograph someone’s dog.</li>
-      <li>Don’t climb trees or stand on railings or benches. Stay out of the water and back from the lake edge.</li>
-      <li>Skip Jacob Ballas Children’s Garden: it doesn’t let in adults without children.</li>
-      <li>Photos go into a gallery everyone at the outing can see, and a shared album afterwards. Tell your photo IC if you’d rather not be in photos.</li>
-    </ul>
-  </section>
-
-  <section aria-labelledby="bring">
-    <h2 id="bring">Bring</h2>
-    <p>A charged phone and a power bank, a water bottle, an umbrella, insect repellent, and a cap and sunglasses.</p>
-  </section>
-
-  <section aria-labelledby="safety">
-    <h2 id="safety">Safety</h2>
-    <ul>
-      <li>Emergency: call 995, then tell your group IC.</li>
-      <li>Separated? Stay where you are and message your group IC. No reply in 10 minutes: go to the Trellis Garden gazebo.</li>
-      <li>Running late? Go to the Trellis Garden gazebo and find Samuel or Eshem.</li>
-      <li>First aid and drinks are at the Trellis Garden gazebo, and Eshem carries a second first-aid kit.</li>
-      <li>Drink water between rounds. It gets hot by late morning.</li>
-    </ul>
-    <h3>If it rains</h3>
-    <ul>
-      <li>Light rain: we carry on. Most stations are under shelters.</li>
-      <li>Thunder or lightning: stop playing and go into the nearest building, not an open gazebo.</li>
-      <li>Heavy rain or a storm that won’t pass: we’ll send the wet-weather plan on WhatsApp.</li>
-    </ul>
+  <section aria-labelledby="scoring">
+    <h2 id="scoring">Scoring</h2>
+    <p>Each station ranks the five groups.</p>
+    <!-- Bar heights follow the points: 300, 240, 180, 120, 60. -->
+    <ol class="ladder" aria-label="Station points by place">
+      <li style="--pts: 5"><span class="place">1st</span><span class="pts">300</span></li>
+      <li style="--pts: 4"><span class="place">2nd</span><span class="pts">240</span></li>
+      <li style="--pts: 3"><span class="place">3rd</span><span class="pts">180</span></li>
+      <li style="--pts: 2"><span class="place">4th</span><span class="pts">120</span></li>
+      <li style="--pts: 1"><span class="place">5th</span><span class="pts">60</span></li>
+    </ol>
+    <p>Tied groups split their places’ points, so two tied for first get 270 each.</p>
+    <p>Each photo challenge you complete earns 10 to 80 points.</p>
+    <p>The highest total wins and picks their bubble tea first. A tie goes to the group with more photo points.</p>
   </section>
 
   <a class="card" href="types.html">
     <svg class="lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-    <span><strong>Types of Christ: the answers</strong><small>Opens with the password we give at the results</small></span>
+    <span><strong>Types of Christ: the answers</strong></span>
     <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
   </a>
-
-  <footer>
-    <p>Last updated Fri 13 Nov, 6 pm</p>
-  </footer>
 </main>
 </body>
 </html>

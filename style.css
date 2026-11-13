@@ -1,18 +1,28 @@
-/* YAF Outing guide. One column for phones, the photo app's green, light only like the app.
-   No web fonts or scripts from elsewhere, so it loads on a weak signal. */
+/* YAF Outing guide.
+   Layout: a pocket programme. One column for phones; the day as a time rail; station points as a
+   ladder drawn to scale; the photo app up top and the Types answers at the end.
+   Light only, like the photo app, in its green and its Inter, with Bricolage Grotesque for headings.
+   Fonts load without blocking, so a weak signal shows the system font first. */
 :root {
+  --paper: #ffffff;
+  --ink: #1b221e;
+  --ink: oklch(0.24 0.015 155);
+  --muted: #545c57;
+  --muted: oklch(0.46 0.015 155);
+  --line: #dce2de;
+  --line: oklch(0.91 0.012 155);
   --green: #1c5e3e;
   --green: oklch(0.43 0.11 155);
   --green-soft: #eef6f1;
   --green-soft: oklch(0.96 0.03 155);
-  --ink: #18181b;
-  --muted: #555b57;
-  --line: #d9ddda;
-  --paper: #ffffff;
+  --error: #9b1c1c;
+
+  --display: "Bricolage Grotesque", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --text: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   color-scheme: light;
 }
 
-* { box-sizing: border-box; }
+*, *::before, *::after { box-sizing: border-box; }
 
 html { -webkit-text-size-adjust: 100%; }
 
@@ -20,54 +30,111 @@ body {
   margin: 0;
   background: var(--paper);
   color: var(--ink);
-  font: 17px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font: 17px/1.5 var(--text);
 }
 
 main {
+  position: relative;
   max-width: 36rem;
   margin: 0 auto;
-  padding: max(20px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(40px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+  padding-block: max(24px, env(safe-area-inset-top)) max(48px, env(safe-area-inset-bottom));
+  padding-left: max(16px, env(safe-area-inset-left));
+  padding-right: max(16px, env(safe-area-inset-right));
 }
 
-h1, h2, h3 { line-height: 1.2; text-wrap: balance; }
-h1 { font-size: 1.75rem; margin: 0; }
-h2 { font-size: 1.3rem; margin: 2.25rem 0 0.75rem; }
-h3 { font-size: 1.1rem; margin: 1.5rem 0 0.5rem; }
-p { margin: 0.5rem 0; }
-ul { margin: 0.5rem 0; padding-left: 1.25rem; }
-li { margin: 0.35rem 0; }
-li::marker { color: var(--muted); }
+/* Type scale: 40 / 24 / 17 / 16 px. */
+h1, h2, h3 { font-family: var(--display); line-height: 1.15; text-wrap: balance; margin: 0; }
+h1 { font-size: 2.5rem; font-weight: 800; letter-spacing: -0.02em; }
+h2 { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 0.75rem; }
+p { margin: 0.5rem 0; text-wrap: pretty; }
 a { color: var(--green); text-underline-offset: 3px; }
 a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid var(--green); outline-offset: 2px; }
 strong { font-weight: 650; }
 
-.sub { color: var(--muted); margin-top: 0.25rem; text-wrap: balance; }
-.intro { margin-top: 1rem; }
-.note { color: var(--muted); font-size: 1rem; text-wrap: pretty; }
+section { margin-top: 2.5rem; }
 
-/* The day, as a rail of times. Each place opens in Google Maps. */
-.timeline { list-style: none; margin: 0.75rem 0 0; padding: 0; }
-.timeline li {
-  display: grid;
-  grid-template-columns: 3.4rem 1fr;
-  gap: 0 0.75rem;
-  margin: 0;
-  padding: 0.6rem 0;
-  border-top: 1px solid var(--line);
+.sub { color: var(--muted); margin-top: 0.35rem; }
+.quest { margin-top: 1.25rem; }
+.note { color: var(--muted); font-size: 1rem; }
+
+/* The one link that matters on the day: the photo app. */
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  margin-top: 0.75rem;
+  border-radius: 10px;
+  background: var(--green);
+  color: var(--paper);
+  font-weight: 600;
+  text-decoration: none;
 }
-.timeline li:last-child { border-bottom: 1px solid var(--line); }
-.time { font-weight: 650; font-variant-numeric: tabular-nums; }
+
+/* The day as a rail: a time, then a dot on the line. The main block of the morning gets a filled
+   dot. Each place opens in Google Maps. */
+.timeline { list-style: none; margin: 1rem 0 0; padding: 0; }
+.timeline li { display: grid; grid-template-columns: 3.1rem 1fr; column-gap: 0.85rem; }
+.time { font-weight: 700; font-variant-numeric: tabular-nums; text-align: right; }
+.timeline li > div { position: relative; min-width: 0; padding: 0 0 1.25rem 1.35rem; }
+.timeline li > div::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--line);
+}
+.timeline li:first-child > div::before { top: 0.75em; }
+.timeline li:last-child > div::before { bottom: auto; height: 0.75em; }
+.timeline li:last-child > div { padding-bottom: 0; }
+.timeline li > div::after {
+  content: "";
+  position: absolute;
+  left: -5px;
+  top: calc(0.75em - 6px);
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--green);
+  border-radius: 50%;
+  background: var(--paper);
+}
+.timeline li.main > div::after { background: var(--green); }
 .what { margin: 0; }
 .where { margin: 0.15rem 0 0; color: var(--muted); }
-.where a { display: inline-flex; align-items: center; gap: 0.3rem; min-height: 44px; margin: -10px 0; }
-.pin { width: 1rem; height: 1rem; flex: none; }
+/* Inline, so a name that wraps stays clear of the line above; the padding makes the tap area 44 px. */
+.where a { padding-block: 0.75rem; }
+.pin { display: inline-block; width: 1rem; height: 1rem; margin-right: 0.3rem; vertical-align: -0.15em; }
+
+/* Station points by place, bars to scale (60 points a step). */
+.ladder {
+  list-style: none;
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+  margin: 1rem 0 1.25rem;
+  padding: 0;
+}
+.ladder li { flex: 1; min-width: 0; display: flex; flex-direction: column; text-align: center; }
+.ladder li::before {
+  content: "";
+  order: 1;
+  height: calc(var(--pts) * 0.8rem);
+  margin-top: 0.25rem;
+  border-top: 3px solid var(--green);
+  border-radius: 6px 6px 0 0;
+  background: var(--green-soft);
+}
+.ladder .pts { order: 0; font-family: var(--display); font-size: 1.25rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.ladder .place { order: 2; padding-top: 0.3rem; border-top: 1px solid var(--line); color: var(--muted); font-size: 1rem; }
 
 /* The answers page: a card that opens it from the guide, and its lock. */
 .card {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  margin-top: 2.25rem;
+  gap: 0.85rem;
+  margin-top: 2.5rem;
   padding: 1rem;
   border: 1px solid var(--line);
   border-radius: 14px;
@@ -77,21 +144,21 @@ strong { font-weight: 650; }
 .card:active { background: var(--green-soft); }
 .card .lock { width: 1.5rem; height: 1.5rem; color: var(--green); flex: none; }
 .card span { flex: 1; min-width: 0; }
-.card strong { display: block; text-wrap: balance; }
+.card strong { display: block; font-weight: 600; text-wrap: balance; }
 .card small { display: block; color: var(--muted); font-size: 1rem; }
 .chev { width: 1.25rem; height: 1.25rem; color: var(--muted); flex: none; }
 
 .back { display: inline-flex; align-items: center; min-height: 44px; margin: -8px 0 0.5rem; }
 
 form.unlock { margin-top: 1.5rem; }
-form.unlock label { display: block; font-weight: 650; margin-bottom: 0.4rem; }
+form.unlock label { display: block; font-weight: 600; margin-bottom: 0.4rem; }
 .row { display: flex; gap: 0.5rem; }
 .row input {
   flex: 1;
   min-width: 0;
   min-height: 48px;
   padding: 0 0.85rem;
-  border: 1px solid #8a918c;
+  border: 1px solid var(--muted);
   border-radius: 10px;
   font: inherit;
   color: inherit;
@@ -103,45 +170,104 @@ button {
   border: 0;
   border-radius: 10px;
   background: var(--green);
-  color: #fff;
+  color: var(--paper);
   font: inherit;
-  font-weight: 650;
+  font-weight: 600;
 }
 button:active, .button:active { opacity: 0.85; }
 button:disabled { opacity: 0.6; }
-/* The one link that matters on the day: the photo app. */
-.button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 48px;
-  margin: 0.75rem 0 0.5rem;
-  border-radius: 10px;
-  background: var(--green);
-  color: #fff;
-  font-weight: 650;
-  text-decoration: none;
-}
-.error { color: #9b1c1c; font-weight: 600; min-height: 1.5em; }
+.error { color: var(--error); font-weight: 600; min-height: 1.5em; }
 
 #answers:focus { outline: none; }
 
 /* One Type of Christ: the hint, how it points to the Type, how the Type points to Christ. */
-.type { margin-top: 2rem; padding-top: 1.25rem; border-top: 1px solid var(--line); }
+.intro { margin-top: 1rem; }
+.type { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--line); }
 .type h2 { margin: 0; }
 .hint {
   margin: 0.75rem 0;
   padding: 0.6rem 0.9rem;
-  border-left: 3px solid var(--green);
+  border-radius: 10px;
   background: var(--green-soft);
-  border-radius: 0 10px 10px 0;
   font-style: italic;
 }
 .hint p { margin: 0; }
 .label { display: block; font-size: 1rem; font-weight: 700; color: var(--green); margin: 1rem 0 0.25rem; }
 .refs { color: var(--muted); font-size: 1rem; margin-top: 0.75rem; line-height: 2; }
-.refs a.ref { padding: 0.5rem 0; }
-/* Each Bible reference opens its KJV text in a new tab, keeping the reader's place here. */
-a.ref { white-space: nowrap; text-decoration-thickness: 1px; text-decoration-color: color-mix(in oklch, var(--green) 45%, transparent); }
+/* Each Bible reference shows its KJV text in the box below; the padding makes the tap area 44 px. */
+a.ref {
+  padding-block: 0.75rem;
+  white-space: nowrap;
+  text-decoration-thickness: 1px;
+  text-decoration-color: color-mix(in oklch, var(--green) 45%, transparent);
+}
+a.ref[aria-expanded="true"] { text-decoration-thickness: 2px; text-decoration-color: var(--green); }
 
-footer { margin-top: 2.5rem; color: var(--muted); font-size: 1rem; }
+/* The verses of a tapped reference, under it, with a caret pointing at it. Scripture is set in a
+   book face to stand apart from the notes. */
+.verse {
+  position: absolute;
+  z-index: 5;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--paper);
+  /* The first shadow, in the page colour, hides the line under the reference. */
+  box-shadow: 0 -8px 0 var(--paper), 0 10px 30px color-mix(in oklch, var(--ink) 18%, transparent);
+}
+.verse:focus { outline: none; }
+.verse::before {
+  content: "";
+  position: absolute;
+  top: -7px;
+  left: calc(var(--caret, 24px) - 6px);
+  width: 12px;
+  height: 12px;
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+  background: var(--paper);
+  transform: rotate(45deg);
+}
+.verse-head { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; padding-left: 1rem; }
+.verse-head p { margin: 0; font-weight: 600; }
+.kjv { color: var(--muted); font-size: 1rem; font-weight: 400; }
+button.verse-close {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  min-height: 44px;
+  padding: 0;
+  background: none;
+  color: var(--muted);
+}
+.verse-close svg { width: 1.25rem; height: 1.25rem; }
+.verse-text {
+  max-height: min(50vh, 22rem);
+  max-height: min(50svh, 22rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0 1rem;
+  font-family: Charter, "Iowan Old Style", Georgia, ui-serif, serif;
+  line-height: 1.55;
+}
+/* A long passage fades at the bottom while there is more to scroll. */
+.verse-text.more {
+  -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 2.5rem), transparent);
+  mask-image: linear-gradient(to bottom, #000 calc(100% - 2.5rem), transparent);
+}
+.verse-text b { font: 600 1rem var(--text); color: var(--green); font-variant-numeric: tabular-nums; }
+.verse-open {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 44px;
+  margin-top: 0.5rem;
+  padding: 0 1rem;
+  border-top: 1px solid var(--line);
+  font-weight: 600;
+  text-decoration: none;
+}
+.verse-open svg { width: 1rem; height: 1rem; }
+@media (prefers-reduced-motion: no-preference) {
+  .verse:not([hidden]) { animation: verse-in 0.15s ease-out; }
+}
+@keyframes verse-in { from { opacity: 0; transform: translateY(-4px); } }
