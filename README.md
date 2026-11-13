@@ -8,7 +8,7 @@ The participant guide for the YAF Outing on Sat 14 Nov 2026, as a static page on
 
 ## Changing the guide
 
-Edit `index.html`, update the "Last updated" line at the bottom, and push to `main`. Pages publishes it within a minute or two. Keep it short: the timeline and the basic rules only. Station rules are on the cards at each station, and each group's stops are in the photo app, which follows any change to the round times.
+Edit `index.html`, update the "Last updated" line at the bottom (with the time, on the day), and push to `main`. Pages publishes it within a minute or two, and phones may keep the old copy for up to 10 minutes. Keep it short: the timeline and the basic rules only. Station rules are on the cards at each station, and each group's stops are in the photo app, which follows any change to the round times.
 
 The source of truth for the event is the committee's Google Doc (Participant guide tab). Change both.
 
@@ -22,4 +22,4 @@ TYPES_PASSWORD=… node tools/types.mjs decrypt   # writes types.src.html (not c
 TYPES_PASSWORD=… node tools/types.mjs encrypt   # locks it back into types.html
 ```
 
-Commit `types.html` only. Scripture quotes are exact KJV, and each type uses only the link the New Testament itself draws.
+Commit `types.html` only. `encrypt` refuses a password that doesn't open the current page, so a typo can't lock the answers for good. Bible references link to the passage in the KJV on BibleGateway (`<a class="ref" href="https://www.biblegateway.com/passage/?search=Hebrews%207%3A3&amp;version=KJV" target="_blank" rel="noopener">Hebrews 7:3</a>`). Scripture quotes are exact KJV, and each type uses only the link the New Testament itself draws.
