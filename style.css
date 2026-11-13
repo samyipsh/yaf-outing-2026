@@ -9,7 +9,6 @@
   --muted: #555b57;
   --line: #d9ddda;
   --paper: #ffffff;
-  --warn-soft: #fbf4e4;
   color-scheme: light;
 }
 
@@ -44,7 +43,7 @@ strong { font-weight: 650; }
 
 .sub { color: var(--muted); margin-top: 0.25rem; text-wrap: balance; }
 .intro { margin-top: 1rem; }
-.note { color: var(--muted); font-size: 1rem; }
+.note { color: var(--muted); font-size: 1rem; text-wrap: pretty; }
 
 /* The day, as a rail of times. Each place opens in Google Maps. */
 .timeline { list-style: none; margin: 0.75rem 0 0; padding: 0; }
@@ -87,7 +86,7 @@ strong { font-weight: 650; }
 form.unlock { margin-top: 1.5rem; }
 form.unlock label { display: block; font-weight: 650; margin-bottom: 0.4rem; }
 .row { display: flex; gap: 0.5rem; }
-input[type="password"] {
+.row input {
   flex: 1;
   min-width: 0;
   min-height: 48px;
@@ -138,7 +137,8 @@ button:disabled { opacity: 0.6; }
 }
 .hint p { margin: 0; }
 .label { display: block; font-size: 1rem; font-weight: 700; color: var(--green); margin: 1rem 0 0.25rem; }
-.refs { color: var(--muted); font-size: 1rem; margin-top: 0.75rem; }
+.refs { color: var(--muted); font-size: 1rem; margin-top: 0.75rem; line-height: 2; }
+.refs a.ref { padding: 0.5rem 0; }
 /* Each Bible reference opens its KJV text in a new tab, keeping the reader's place here. */
 a.ref { white-space: nowrap; text-decoration-thickness: 1px; text-decoration-color: color-mix(in oklch, var(--green) 45%, transparent); }
 
